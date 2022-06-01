@@ -2,6 +2,7 @@
 <!-- ----- debut Router1 -->
 <?php
 require ('../controller/ControllerSite.php');
+require ('../controller/ControllerIndividu.php');
 require ('../controller/ControllerEvenement.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -17,10 +18,15 @@ $action = htmlspecialchars($param["action"]);
 switch ($action) {
  case "evenementListe" :
  case "evenementAjout" :
- 
+ case "evenementAjouter" :
      ControllerEvenement::$action();
 
      break;
+ case "individuListe" :
+ case "individuAjout":
+ case "individuAjouter":
+     ControllerIndividu::$action();
+ break;
  // Tache par défaut
  default:
   $action = "siteAccueil";

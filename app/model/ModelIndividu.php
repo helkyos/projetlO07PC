@@ -72,6 +72,52 @@ function getFamille_id() {
   return $this->sexe;
  }
  
+ public static function getAllByFamily() {
+  try {
+   $database = Model::getInstance();
+   $query = "select * from individu where famille_id=1002 ORDER BY id";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ public static function insert() {
+  try {
+   $database = Model::getInstance();
+   
+    $query = "select max(id) as max from individu";
+    $statement = $database->query($query);
+    $id = $statement->fetch();
+    $nouveau_individu = $id["max"] + 1;
+
+    $query = "insert into individu(famille_id, id, nom, prenom, sexe,pere,mere) values (:famille_id, :id, :nom, :prenom,:sexe,0,0)";
+    $statement = $database->prepare($query);
+    $statement->execute([
+                'id'=>$nouveau_individu,
+                'famille_id'=>1002,
+                'nom'=>$_GET["nom"],
+                'prenom'=>$_GET["prenom"],
+                'sexe'=>$_GET["sexe"],  
+            ]);
+    echo "l'ajout a été effectué";
+
+   echo "test";
+   $query = "Select * from individu where :id=id";
+   $statement = $database->prepare($query);
+   $statement->execute([  
+     'id'=>$nouveau_individu, 
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
+ }
  
     
 }

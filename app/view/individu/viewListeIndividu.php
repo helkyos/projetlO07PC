@@ -17,10 +17,11 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         <tr>
           <th scope = "col">famille_id</th>
           <th scope = "col">id</th>
-          <th scope = "col">Iid</th>
-          <th scope = "col">event_type</th>
-          <th scope = "col">event_date</th>
-          <th scope = "col">event_lieu</th>
+          <th scope = "col">Mere</th>
+          <th scope = "col">Nom</th>
+          <th scope = "col">Pere</th>
+          <th scope = "col">Prenom</th>
+          <th scope = "col">Sexe</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +30,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           
           foreach ($results as $element) {
             
-           echo "<tr><td>".$element->getFamille_id()."</td><td>".$element->getId()."</td><td>".$element->getIid()."</td><td>".$element->getEvent_type()."</td><td>".$element->getEvent_date()."<td>".$element->getEvent_lieu()."</td></tr>";
+           echo "<tr><td>".$element->getFamille_id()."</td><td>".$element->getId()."</td><td>".$element->getMere()."</td><td>".$element->getNom()."</td><td>".$element->getPere()."<td>".$element->getPrenom()."</td><td>".$element->getSexe()."</td></tr>";
           }
           
           ?>
@@ -42,3 +43,4 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
   
   
   
+

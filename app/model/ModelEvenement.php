@@ -4,6 +4,7 @@
 <?php
 require_once 'Model.php';
 
+
 class ModelEvenement {
     private $event_date,$event_lieu,$event_type,$famille_id,$id,$iid;
     public function __construct($event_date = NULL, $event_lieu = NULL, $event_type = NULL, $famille_id = NULL, $id=NULL,$iid=NULL) {
@@ -68,7 +69,7 @@ function getEvent_lieu() {
  public static function getAllByFamily() {
   try {
    $database = Model::getInstance();
-   $query = "select * from evenement where family_id=1002 ORDER BY id";
+   $query = "select * from evenement where famille_id=1002 ORDER BY id";
    $statement = $database->prepare($query);
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelEvenement");
@@ -76,6 +77,96 @@ function getEvent_lieu() {
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
+  }
+ }
+ 
+ public static function getAllIndividu() {
+  try {
+   $database = Model::getInstance();
+   $query = "select distinct nom from individu where famille_id=1002 ";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll();
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ public static function searchID($nom) {
+  try {
+   $database = Model::getInstance();
+   $query = "select id from individu where famille_id=1002 and nom= :nom ";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'nom' => $nom,
+   ]);
+   $results = $statement->fetchALL(PDO::FETCH_CLASS, "ModelEvenement");
+foreach($results as $user)
+{
+    $id=$user->getId();
+    echo $id;
+}
+return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ 
+ public static function insert(/*$event_date, $event_lieu, $event_type,$famille_id,*/$iid) {
+  try {
+   $database = Model::getInstance();
+   
+    $query = "select max(id) as max from evenement";
+    $statement = $database->query($query);
+    $id = $statement->fetch();
+    $nouveau_evenement = $id["max"] + 1;
+
+    $query = "insert into evenement(id, event_date, event_lieu, event_type,famille_id,iid) values (:id, :event_date, :event_lieu, :event_type,:famille_id,:iid)";
+    $statement = $database->prepare($query);
+    $statement->execute([
+                'id'=>$nouveau_evenement,
+                'event_date'=>$_GET["event_date"],
+                'event_lieu'=>$_GET["event_lieu"],
+                'event_type'=>$_GET["event_type"],
+                'famille_id'=> 1002 ,
+                'iid'=>$iid,
+            ]);
+    echo "l'ajout a été effectué";
+  /* // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from evenement";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+
+   // ajout d'un nouveau tuple;
+   $query = "insert into evenement value (:event_date, :event_lieu, :event_type, :famille_id,:id,:iid)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'event_date' => $event_date,
+     'event_lieu' => $event_lieu,
+     'event_type' => $event_type,
+     'famille_id' => $famille_id,
+     'id'=>$id,
+     'iid' => $iid
+   ]);*/
+   echo "test";
+   $query = "Select * from evenement where :id=id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+    
+     'id'=>$nouveau_evenement,
+     
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
   }
  }
     
