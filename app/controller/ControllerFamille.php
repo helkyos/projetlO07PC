@@ -5,11 +5,11 @@ require_once '../model/ModelFamille.php' ;
 
 class ControllerFamille {
     // ---- Page d'accueil
-    public static function caveAccueil() {
+    public static function siteAccueil() {
         include 'config.php' ;
-        $vue = $root . 'app/view/viewCaveAccueil.php' ;
+        $vue = $root . 'app/view/viewSiteAccueil.php' ;
         if (DEBUG)
-            echo ("ControllerCave : viewAll : vue = $vue") ;
+            echo ("ControllerSite : siteAccueil : vue = $vue") ;
         require ($vue) ;
     }
     
