@@ -1,6 +1,10 @@
+
 <!-- ----- debut fragmentCaveJumbotron -->
+
 <div class="jumbotron">
-  <h1>Projet Généalogie</h1>
+    <?php
+    echo ("<h2>" . $_SESSION["familleSelect"] . "</h2>\n") ;
+    ?>
 </div>
 <p/>
 <!-- ----- fin fragmentCaveJumbotron -->
