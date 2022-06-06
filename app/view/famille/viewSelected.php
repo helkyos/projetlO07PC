@@ -1,7 +1,6 @@
 <!-- début viewSelected -->
 
 <?php
-session_start() ;
 require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
 ?>
 
@@ -16,6 +15,7 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
         if ($results) {
             $nom = $_GET["nom"] ;
             $_SESSION["familleSelect"] = "FAMILLE " . $nom ;
+            $_SESSION["famille_id"] = $results[0]->getId() ;
             
             include $root . '/app/view/fragment/fragmentCaveJumbotron.php' ;
             
