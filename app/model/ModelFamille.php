@@ -47,7 +47,6 @@ class ModelFamille {
         }
     }
       
-        
     public static function getAll() {
         try {
             $database = Model::getInstance();
@@ -92,7 +91,8 @@ class ModelFamille {
             $id++;
 
             // ajout d'un nouveau tuple;
-            $query = "insert into famille value (:id, :nom)";
+            $query = "insert into famille value (:id, :nom);"
+                    . "insert into individu value (:id, 0, '?', '?', '?', 0, 0)";
             $statement = $database->prepare($query);
             $statement->execute([
               'id' => $id,
