@@ -15,7 +15,7 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
         if ($results) {
             $nom = $_GET["nom"] ;
             $_SESSION["familleSelect"] = "FAMILLE " . $nom ;
-            $_SESSION["famille_id"] = $results[0]->getId() ;
+            $_SESSION["famille_id"] = $results ;
             
             include $root . '/app/view/fragment/fragmentCaveJumbotron.php' ;
             
