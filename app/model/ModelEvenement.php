@@ -6,7 +6,7 @@ require_once 'Model.php';
 
 
 class ModelEvenement {
-    private $event_date,$event_lieu,$event_type,$famille_id,$id,$iid;
+    private $event_date, $event_lieu, $event_type, $famille_id, $id, $iid;
     public function __construct($event_date = NULL, $event_lieu = NULL, $event_type = NULL, $famille_id = NULL, $id=NULL,$iid=NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id)) {
@@ -69,9 +69,11 @@ function getEvent_lieu() {
  public static function getAllByFamily() {
   try {
    $database = Model::getInstance();
-   $query = "select * from evenement where famille_id=1002 ORDER BY id";
+   $query = "select * from evenement where famille_id=:famille_id ORDER BY id";
    $statement = $database->prepare($query);
-   $statement->execute();
+   $statement->execute([
+       'famille_id' => $_SESSION["famille_id"]
+   ]);
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelEvenement");
    return $results;
   } catch (PDOException $e) {
