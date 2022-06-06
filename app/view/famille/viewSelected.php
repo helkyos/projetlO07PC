@@ -1,6 +1,7 @@
 <!-- début viewSelected -->
 
 <?php
+session_start() ;
 require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
 ?>
 
@@ -10,16 +11,19 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
         include $root . '/app/view/fragment/fragmentCaveMenu.html' ;
         ?>
         
-        <div class="jumbotron">
-          <h1>FAMILLE </h1>
-        </div>
-        <p/>
         <!-- ===================================================== -->
         <?php
         if ($results) {
+            $nom = $_GET["nom"] ;
+            $_SESSION["familleSelect"] = "FAMILLE " . $nom ;
+            
+            include $root . '/app/view/fragment/fragmentCaveJumbotron.php' ;
+            
             echo ("<h3>Confirmation de la sélection d'une famille</h3>");
-            echo ("<strong>La famille " . $_GET["nom"] . "(" . $results[0]->getId() . ") est maintenant sélectionnée.</strong>");
+            echo ("<strong>La famille " . $nom . "(" . $results[0]->getId() . ") est maintenant sélectionnée.</strong>");
         } else {
+            include $root . '/app/view/famille/fragmentCaveJumbotron.html' ;
+            
             echo ("<h3>Problème de sélection de la famille</h3>");
             echo ("nom = " . $_GET['nom']);
         }

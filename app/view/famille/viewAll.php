@@ -1,6 +1,7 @@
 <!-- début viewAll -->
 
 <?php
+session_start() ;
 require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
 ?>
 
@@ -8,7 +9,7 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
     <div class="container">
         <?php
         include $root . '/app/view/fragment/fragmentCaveMenu.html' ;
-        include $root . '/app/view/famille/fragmentCaveJumbotron.html' ;
+        include $root . '/app/view/fragment/fragmentCaveJumbotron.php' ;
         ?>
         
         <h3>Liste des familles</h3>
@@ -23,7 +24,7 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
             
             <tbody>
                 <?php
-                // La liste des vins est dans une variable $results             
+                // La liste des familles est dans une variable $results             
                 foreach ($results as $element) {
                     printf("<tr><td>%d</td><td>%s</td></tr>", $element->getId(), 
                     $element->getNom());
