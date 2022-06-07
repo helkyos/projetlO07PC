@@ -36,6 +36,7 @@ switch ($action) {
      break;
     
  case "lienReadAll" :
+ case "lienCreateP" :
      ControllerLien::$action($args);
      break;
 
