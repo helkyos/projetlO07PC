@@ -100,18 +100,21 @@ class ModelLien {
             $database = Model::getInstance();
 
             // recherche de la valeur de la clé = max(id) + 1
-            $query = "select max(id) from famille";
+            $query = "select max(id) from lien where famille_id = :famille_id";
             $statement = $database->query($query);
-            $tuple = $statement->fetch();
+            $tuple = $statement->fetch([
+                'famille_id' => $_SESSION["famille_id"]
+            ]);
             $id = $tuple['0'];
             $id++;
 
             // ajout d'un nouveau tuple;
-            $query = "insert into lien value (:id, :nom)";
-            $statement = $database->prepare($query);
+            $query = "insert into lien value (:famille_id, :id, :iid1, :iid2, )";
+            $statement = $database-
             $statement->execute([
-              'id' => $id,
-              'nom' => $nom
+                'famille_id' => $_SESSION["famille_id"],
+                'id' => $id,
+                'iid1' => $enfant->getId(),
             ]);
             return $id;
         } 
