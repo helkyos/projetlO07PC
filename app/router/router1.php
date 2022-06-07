@@ -3,8 +3,9 @@
 <?php
 require ('../controller/ControllerSite.php');
 require ('../controller/ControllerFamille.php');
-require ('../controller/ControllerIndividu.php');
 require ('../controller/ControllerEvenement.php');
+require ('../controller/ControllerLien.php');
+require ('../controller/ControllerIndividu.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -14,7 +15,9 @@ $query_string = $_SERVER['QUERY_STRING'];
 parse_str($query_string, $param);
 
 // --- $action contient le nom de la méthode statique recherchée
-$action = htmlspecialchars($param["action"]);
+$action = $param["action"];
+
+$args= $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
@@ -29,13 +32,17 @@ switch ($action) {
  case "evenementListe" :
  case "evenementAjout" :
  case "evenementAjouter" :
-     ControllerEvenement::$action();
-
+     ControllerEvenement::$action($args);
      break;
+    
+ case "lienReadAll" :
+     ControllerLien::$action($args);
+     break;
+
  case "individuListe" :
  case "individuAjout":
  case "individuAjouter":
-     ControllerIndividu::$action();
+     ControllerIndividu::$action($args);
  break;
  // Tache par défaut
  default:
