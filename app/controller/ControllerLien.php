@@ -16,16 +16,18 @@ class ControllerLien {
     }
     
     // --- Affiche le formulaire de creation d'une famille
-    public static function familleCreate() {
+    public static function lienCreateP() {
+        $results = ModelIndividu::getAll() ;
+        
         // ---- Construction chemin de la vue
         include 'config.php' ;
-        $vue = $root . 'app/view/famille/viewInsert.php';
+        $vue = $root . 'app/view/lien/viewInsertP.php';
         require ($vue) ;
     }
     
-    public static function familleCreated() {
-        $results = ModelFamille::insert(
-            htmlspecialchars($_GET['nom'])
+    public static function lienCreatedP() {
+        $results = ModelLien::insert(
+            htmlspecialchars($_SESSION["famille_id"]), htmlspecialchars($_GET['nom'])
         ) ;
         
         // ----- Construction chemin de la vue
