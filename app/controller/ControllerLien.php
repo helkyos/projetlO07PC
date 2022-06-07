@@ -2,6 +2,7 @@
 
 <?php
 require_once '../model/ModelLien.php' ;
+require_once '../model/ModelIndividu.php' ;
 
 class ControllerLien {
     // ---- Liste des liens
