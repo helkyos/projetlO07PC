@@ -92,14 +92,34 @@ class ModelIndividu  {
             return NULL;
         }
     }
+    
+    public static function getAllSexe($sexe) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from individu where famille_id = :famille_id and sexe = :sexe";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'famille_id' => $_SESSION["famille_id"],
+                'sexe' => $sexe
+            ]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            return $results;
+        } 
+        catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
 
     public static function getAllByFamily() {
      try {
       $database = Model::getInstance();
-      $query = "select * from individu where famille_id=1002 ORDER BY id";
+      $query = "select * from individu where famille_id=:famille_id ORDER BY id";
       $statement = $database->prepare($query);
-      $statement->execute();
+      $statement->execute([
+          'famille_id' => $_SESSION["famille_id"]
+      ]);
       $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
       return $results;
      } catch (PDOException $e) {
@@ -120,7 +140,7 @@ class ModelIndividu  {
     $statement = $database->prepare($query);
     $statement->execute([
                 'id'=>$nouveau_individu,
-                'famille_id'=>1002,
+                'famille_id' => $_SESSION["famille_id"],
                 'nom'=>$_GET["nom"],
                 'prenom'=>$_GET["prenom"],
                 'sexe'=>$_GET["sexe"],  

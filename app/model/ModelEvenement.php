@@ -85,9 +85,11 @@ function getEvent_lieu() {
  public static function getAllIndividu() {
   try {
    $database = Model::getInstance();
-   $query = "select distinct nom from individu where famille_id=1002 ";
+   $query = "select distinct nom from individu where famille_id=:famille_id ";
    $statement = $database->prepare($query);
-   $statement->execute();
+   $statement->execute([
+       'famille_id' => $_SESSION["famille_id"]
+   ]);
    $results = $statement->fetchAll();
    return $results;
   } catch (PDOException $e) {
@@ -99,10 +101,11 @@ function getEvent_lieu() {
  public static function searchID($nom) {
   try {
    $database = Model::getInstance();
-   $query = "select id from individu where famille_id=1002 and nom= :nom ";
+   $query = "select id from individu where famille_id=:famille_id and nom= :nom ";
    $statement = $database->prepare($query);
    $statement->execute([
-     'nom' => $nom,
+       'famille_id' => $_SESSION["famille_id"],
+        'nom' => $nom,
    ]);
    $results = $statement->fetchALL(PDO::FETCH_CLASS, "ModelEvenement");
 foreach($results as $user)
@@ -134,7 +137,7 @@ return $id;
                 'event_date'=>$_GET["event_date"],
                 'event_lieu'=>$_GET["event_lieu"],
                 'event_type'=>$_GET["event_type"],
-                'famille_id'=> 1002 ,
+                'famille_id'=> $_SESSION["famille_id"] ,
                 'iid'=>$iid,
             ]);
     echo "l'ajout a été effectué";
