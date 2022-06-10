@@ -40,8 +40,12 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
                 
                 <label for="unionType">Sélectionnez un type d'union : </label>
                 <select class="form-control" id="unionType" name="unionType" style="width: 300px">
-                    <option value="divorce">DIVORCE</option>
-                    <option value="mariage">MARIAGE</option>
+                    <option value="COUPLE">COUPLE</option>
+                    <option value="SEPARATION">SÉPARATION</option>
+                    <option value="PACS">PACS</option>
+                    <option value="MARIAGE">MARIAGE</option>
+                    <option value="DIVORCE">DIVORCE</option>
+                   
                 </select>
                 <br>
                 

@@ -14,18 +14,24 @@ require ($root . 'app/view/fragment/fragmentCaveHeader.html') ;
         <!-- ===================================================== -->
         <?php
         if ($results) {
-                echo ("<h3>Confirmation de la création du lien parental </h3>");
+                echo ("<h3>Confirmation de la création du lien Union </h3>");
                 echo("<ul>");
                 echo ("<li>famille_id = " . $_SESSION["famille_id"] . "</li>");
-                echo ("<li>enfant = " . $_GET["enfant"] . "</li>");
-                echo ("<li>parent = " . $_GET["parent"] . "</li>");
+                echo ("<li>homme_id = " . $_GET["homme"] . "</li>");
+                echo ("<li>femme_id = " . $_GET["femme"] . "</li>");
+                echo ("<li>lien_type = " . $_GET["unionType"] . "</li>");
+                echo ("<li>lien_date = " . $_GET["date"] . "</li>");
+                echo ("<li>lien_lieu = " . $_GET["lieu"] . "</li>");
                 echo("</ul>");
         } else {
-            echo ("<h3>Problème d'insertion du lien parental</h3>");
+            echo ("<h3>Problème d'insertion du lien Union</h3>");
             echo ("<ul>") ;
             echo ("<li>famille_id = " . $_SESSION["famille_id"] . "</li>");
-            echo ("<li>enfant = " . $_GET["enfant"] . "</li>");
-            echo ("<li>parent = " . $_GET["parent"] . "</li>");
+            echo ("<li>homme_id = " . $_GET["homme"] . "</li>");
+            echo ("<li>femme_id = " . $_GET["femme"] . "</li>");
+            echo ("<li>lien_type = " . $_GET["unionType"] . "</li>");
+            echo ("<li>lien_date = " . $_GET["date"] . "</li>");
+            echo ("<li>lien_lieu = " . $_GET["lieu"] . "</li>");
             echo ("</ul>");
         }
         ?>
