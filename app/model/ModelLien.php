@@ -1,7 +1,6 @@
 <!-- ----- début ModelLien -->
 
 <?php
-session_start() ;
 require_once 'Model.php' ;
 
 class ModelLien {
@@ -107,14 +106,50 @@ class ModelLien {
             ]);
             $id = $tuple['0'];
             $id++;
+            
 
             // ajout d'un nouveau tuple;
-            $query = "insert into lien value (:famille_id, :id, :iid1, :iid2, )";
-            $statement = $database-
+            $query = "insert into lien value (:famille_id, :id, :iid1, :iid2, 'PARENT', '', '')";
+            $statement = $database->prepare($query) ;
             $statement->execute([
                 'famille_id' => $_SESSION["famille_id"],
                 'id' => $id,
-                'iid1' => $enfant->getId(),
+                'iid1' => $enfant,
+                'iid2' => $parent
+            ]);
+            
+            return $id;
+        } 
+        catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
+        }
+    }
+    
+    public static function insertU($homme, $femme, $lien_type, $lien_date, $lien_lieu) {
+        try {
+            $database = Model::getInstance();
+
+            // recherche de la valeur de la clé = max(id) + 1
+            $query = "select max(id) from lien where famille_id = :famille_id";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch([
+                'famille_id' => $_SESSION["famille_id"]
+            ]);
+            $id = $tuple['0'];
+            $id++;
+
+            // ajout d'un nouveau tuple;
+            $query = "insert into lien value (:famille_id, :id, :iid1, :iid2, :lien_type, :lien_date, :lien_lieu)";
+            $statement = $database->prepare($query) ;
+            $statement->execute([
+                'famille_id' => $_SESSION["famille_id"],
+                'id' => $id,
+                'iid1' => $homme->getId(),
+                'iid2' => $femme->getId(),
+                'lien_type' => $lien_type,
+                'lien_date' => $lien_date,
+                'lien_lieu' => $lien_lieu
             ]);
             return $id;
         } 
