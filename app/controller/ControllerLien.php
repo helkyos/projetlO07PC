@@ -51,8 +51,9 @@ class ControllerLien {
     
     public static function lienCreatedU() {
         $results = ModelLien::insertU(
-                
+            htmlspecialchars($_GET["homme"]), htmlspecialchars($_GET["femme"]), htmlspecialchars($_GET["unionType"]), htmlspecialchars($_GET["date"]), htmlspecialchars($_GET["lieu"])
         ) ;
+        
         
         // ----- Construction chemin de la vue
         include 'config.php' ;
