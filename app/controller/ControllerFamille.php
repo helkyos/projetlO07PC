@@ -9,7 +9,7 @@ class ControllerFamille {
         include 'config.php' ;
         $vue = $root . 'app/view/viewSiteAccueil.php' ;
         if (DEBUG)
-            echo ("ControllerSite : siteAccueil : vue = $vue") ;
+            echo ("ControllerSite : viewAll : vue = $vue") ;
         require ($vue) ;
     }
     
