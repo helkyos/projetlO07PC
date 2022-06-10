@@ -99,11 +99,12 @@ class ModelLien {
             $database = Model::getInstance();
 
             // recherche de la valeur de la clé = max(id) + 1
-            $query = "select max(id) from lien where famille_id = :famille_id";
-            $statement = $database->query($query);
-            $tuple = $statement->fetch([
+            $query = "select max(id) from lien where famille_id=:famille_id";
+            $statement = $database->prepare($query);
+            $statement->execute([
                 'famille_id' => $_SESSION["famille_id"]
             ]);
+            $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
             
@@ -132,10 +133,11 @@ class ModelLien {
 
             // recherche de la valeur de la clé = max(id) + 1
             $query = "select max(id) from lien where famille_id = :famille_id";
-            $statement = $database->query($query);
-            $tuple = $statement->fetch([
+            $statement = $database->prepare($query);
+            $statement->execute([
                 'famille_id' => $_SESSION["famille_id"]
             ]);
+            $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
 
@@ -145,8 +147,8 @@ class ModelLien {
             $statement->execute([
                 'famille_id' => $_SESSION["famille_id"],
                 'id' => $id,
-                'iid1' => $homme->getId(),
-                'iid2' => $femme->getId(),
+                'iid1' => $homme,
+                'iid2' => $femme,
                 'lien_type' => $lien_type,
                 'lien_date' => $lien_date,
                 'lien_lieu' => $lien_lieu
