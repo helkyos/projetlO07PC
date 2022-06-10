@@ -22,19 +22,42 @@ class ControllerLien {
         
         // ---- Construction chemin de la vue
         include 'config.php' ;
-        $vue = $root . 'app/view/lien/viewInsertP.php';
+        $vue = $root . '/app/view/lien/viewInsertP.php';
         require ($vue) ;
     }
     
     public static function lienCreatedP() {
-        $results = ModelLien::insert(
-            htmlspecialchars($_SESSION["famille_id"]), htmlspecialchars($_GET['nom'])
+        $results = ModelLien::insertP(
+            htmlspecialchars($_GET["enfant"]), htmlspecialchars($_GET["parent"])
         ) ;
+        $enfant = $_GET["enfant"] ;
+        $parent = $_GET["parent"] ;
         
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/famille/viewInserted.php';
+        $vue = $root . '/app/view/lien/viewInsertedP.php';
         require ($vue);
+    }
+    
+    public static function lienCreateU() {
+        $resultsH = ModelIndividu::getAllSexe('H') ;
+        $resultsF = ModelIndividu::getAllSexe('F') ;
+        
+        // ----- Construction chemin de la vue
+        include 'config.php' ;
+        $vue = $root . '/app/view/lien/viewInsertU.php' ;
+        require ($vue) ;
+    }
+    
+    public static function lienCreatedU() {
+        $results = ModelLien::insertU(
+                
+        ) ;
+        
+        // ----- Construction chemin de la vue
+        include 'config.php' ;
+        $vue = $root . '/app/view/lien/viewInsertedU.php' ;
+        require ($vue) ;
     }
     
     
