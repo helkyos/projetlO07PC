@@ -11,7 +11,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       include $root . '/app/view/fragment/fragmentCaveMenu.html';
       include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
       if (isset($results)){?>
-
+      
+          
     <table class = "table table-striped table-bordered">
       <thead>
         <tr>
