@@ -34,7 +34,9 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           ?>
       </tbody>
     </table>
-      <?php}
+      <?php
+      
+          }
           else echo "<h1>Pas d'individu dans la famille : ".$_SESSION['famille_id']."</h1>";?>
   </div>
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
