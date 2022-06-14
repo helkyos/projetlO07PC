@@ -37,6 +37,29 @@ public static function individuAjout() {
   require ($vue);
      
  }
+ public static function individuNomListe(){
+    // ajouter une validation des informations du formulaire
+  $results = ModelIndividu::getAllIndividu();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/individu/viewSelectionIndividu.php';
+  require ($vue);
+     
+ }
+ 
+ public static function individuFiche(){
+    // ajouter une validation des informations du formulaire
+  $results = ModelIndividu::catchIndividuEvent();
+  $results2= ModelIndividu::catchIndividuPere();
+  $results3= ModelIndividu::catchIndividuMere();
+  $results4= ModelIndividu::catchIndividuUnion();
+  $results5= ModelIndividu::catchIndividuEnfant();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/individu/viewFicheIndividu.php';
+  require ($vue);
+     
+ }
 }
 
 

@@ -4,6 +4,7 @@
 require ('../controller/ControllerSite.php');
 require ('../controller/ControllerFamille.php');
 require ('../controller/ControllerEvenement.php');
+require ('../controller/ControllerIndividu.php');
 require ('../controller/ControllerLien.php');
 
 // --- récupération de l'action passée dans l'URL
@@ -41,6 +42,13 @@ switch ($action) {
     case "lienCreatedU" :
         ControllerLien::$action($args);
         break;
+    case "individuListe" :
+ case "individuAjout":
+ case "individuAjouter":
+   case  "individuNomListe":
+       case  "individuFiche":
+     ControllerIndividu::$action($args);
+ break;
     
     
     case "siteAccueil";

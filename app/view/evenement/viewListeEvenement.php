@@ -9,8 +9,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       <?php
       include $root . '/app/view/fragment/fragmentCaveMenu.html';
       include $root . '/app/view/fragment/fragmentCaveJumbotron.php';
-      ?>
-
+      if (isset($results)){?>
+      
     <table class = "table table-striped table-bordered">
       <thead>
         <tr>
@@ -34,6 +34,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           ?>
       </tbody>
     </table>
+      <?php}
+          else echo "<h1>Pas d'individu dans la famille : ".$_SESSION['famille_id']."</h1>";?>
   </div>
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 
