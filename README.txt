@@ -2,4 +2,4 @@
 
 PENG Laure
 CORSIN Maxime
-http://dev-isi.utt.fr/~penglaur/lo07_tp/app/router/router1.php?action=CaveAccueil
+http://dev-isi.utt.fr/~penglaur/lo07_tp/projet/
